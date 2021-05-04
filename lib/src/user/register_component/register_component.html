@@ -1,0 +1,43 @@
+<div class="login-form">
+    <h1 class="center-align">Register</h1>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <form (ngSubmit)="register(registerForm)" #registerForm="ngForm"> 
+                
+                <common-auth-inputs-component [user]="user"></common-auth-inputs-component>
+
+                <div class="input-field">
+                    <i class="medium material-icons prefix">code</i>
+                    <input 
+                    [(ngModel)]="user.rePassword" 
+                    ngControl="rePassword" 
+                    #rePassword="ngForm" 
+                    required
+                    [class.inactive]="rePassword.touched && !rePassword.valid"
+                    type="password"
+                    name="rePassword" 
+                    id="rePassword"
+                    >
+                    <label for="rePassword">Repeat Password</label>
+                    <div 
+                    [class.transparent]="!rePassword.touched || (rePassword.value == user.password)"
+                    class="red-text text-darken-2 center-align">
+                    Repeat Password field is required and must match the password
+                    </div>
+                </div>
+
+                <div class="center-align">
+                    <button 
+                    class="btn waves-effect waves-light" 
+                    type="submit" 
+                    name="action"
+                    [disabled]="!registerForm.valid"
+                    >
+                        Register
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="input-field">
+    <i class="medium material-icons prefix">perm_identity</i>
+    <input 
+    [(ngModel)]="user.username" 
+    ngControl="username" 
+    #username="ngForm" 
+    required
+    pattern="[\w\d]{3,10}"
+    [class.invalid]="username.touched && !username.valid" 
+    type="text" 
+    name="username" 
+    id="username"
+    >
+    <label for="username">Username</label>
+    <div 
+    [class.transparent]="!username.touched || username.valid" 
+    class="red-text text-darken-2 center-align">
+    Username is required and should be between 3 and 10 digits or letters
+    </div>
+
+</div>
+<div class="input-field">
+    <i class="medium material-icons prefix">code</i>
+    <input 
+    [(ngModel)]="user.password" 
+    ngControl="password" 
+    #password="ngForm" 
+    required
+    pattern="[\w\d]{3,10}"
+    [class.inactive]="password.touched && !password.valid"
+    type="text"
+    name="password" 
+    id="password"
+    >
+    <label for="password">Password</label>
+    <div 
+    [class.transparent]="!password.touched || password.valid" 
+    class="red-text text-darken-2 center-align">
+    Password is required and should be between 3 and 10 digits or letters
+    </div>
+</div>
