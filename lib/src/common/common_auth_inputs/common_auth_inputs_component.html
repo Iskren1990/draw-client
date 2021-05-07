@@ -5,7 +5,7 @@
     ngControl="username" 
     #username="ngForm" 
     required
-    pattern="[\w\d]{3,10}"
+    pattern="[\w\d\s]{3,10}"
     [class.invalid]="username.touched && !username.valid" 
     type="text" 
     name="username" 
@@ -26,9 +26,9 @@
     ngControl="password" 
     #password="ngForm" 
     required
-    pattern="[\w\d]{3,10}"
+    pattern="[\w\d\s]{3,10}"
     [class.inactive]="password.touched && !password.valid"
-    type="text"
+    type="password"
     name="password" 
     id="password"
     >

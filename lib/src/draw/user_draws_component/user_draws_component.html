@@ -3,3 +3,6 @@
         <draw-card-component [draw]="draw"></draw-card-component>
     </div>
 </div>
+<div *ngIf="draws == null">
+    <h5 class="center-align">No Draws Found</h5>
+</div>

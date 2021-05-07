@@ -28,12 +28,13 @@ class HeaderComponent implements OnInit, OnDestroy {
   @override
   void ngOnInit() {
     userLocalStateSet();
-
+    
     _userStateSubscription = 
-      userService.userUpdated.listen((action)  {
+      userService.userUpdated.listen(
+        (action) {
         print(action);
-        userLocalStateSet();});
-
+        userLocalStateSet();
+        });
   }
 
   @override
@@ -43,7 +44,7 @@ class HeaderComponent implements OnInit, OnDestroy {
 
   void logoutFn() {
     userService.getLogout();
-    _router.navigate('/user/login');
+    _router.navigate('/login');
   }
 
   void userLocalStateSet() {

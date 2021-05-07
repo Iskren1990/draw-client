@@ -29,17 +29,16 @@ class UserService {
   void postLogin(UserModel payload) async {
 
     try {
-
+    
     final res = await _dio.post('/user/login',
       data: payload.userToJson());
 
     if (!res.data['token'].startsWith('Bearer ')) throw Exception(res.data);
 
     UserContext.setUserData(res.data);
+    _userUpdated.add(1);
     await _router.navigateByUrl('/', reload: true);
 
-    _userUpdated.add(1);
-      
     } catch (e) {
       print(e);
     }
@@ -60,10 +59,8 @@ class UserService {
 
   void getLogout() async {
     try {
-      await _router.navigate('/user/login');
       await _dio.get('/user/logout');
       UserContext.deleteUserData();
-
       _userUpdated.add(2);
     } catch (e) {
       print(e);
