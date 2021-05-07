@@ -1,6 +1,5 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:client/src/common/spinner_component/spinner_component.dart';
 
 import 'src/routes.dart';
 
@@ -15,8 +14,6 @@ import 'src/common/footer_component/footer_component.dart';
       routerDirectives,
       HeaderComponent,
       FooterComponent,
-      SpinnerComponent,
     ],
     exports: [RoutePaths, Routes, routerDirectives])
-class AppComponent {
-}
+class AppComponent {}

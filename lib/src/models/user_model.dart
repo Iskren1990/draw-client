@@ -1,26 +1,27 @@
 class UserModel {
-  int _id;
+  String _id;
   String username;
   String password;
   String rePassword;
-  Map<String, Object> draws; // Map<Draws>
 
   UserModel([
+    this._id,
     this.username,
     this.password,
     this.rePassword
   ]);
 
-  Map<String, dynamic> loginToJson() {
+  Map<String, dynamic> userToJson() {
     return {
       'username': username,
       'password': password,
     };
   }
-  Map<String, dynamic> registerToJson() {
-    return {
-      'username': username,
-      'password': password,
-    };
+
+    UserModel.userFromJson(Map json) {
+      _id = json['_id'];
+      username = json['username'];
+      password = json['password'];
   }
+
 }

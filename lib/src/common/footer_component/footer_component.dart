@@ -6,8 +6,6 @@ import 'package:angular/angular.dart';
   templateUrl: 'footer_component.html',
   styleUrls: ['footer_component.css']
 )
-class FooterComponent {
-  var name = 'Angular';
-}
+class FooterComponent {}
 
 

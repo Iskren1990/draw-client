@@ -1,0 +1,17 @@
+:host{
+    flex: 1 1 100%;
+    
+    .canvas-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        
+        .canvas {
+            border: 2px solid rgb(38, 166, 154);
+        }
+        .btn-wrapper {
+            flex: 1 0 100%;
+            text-align: center;
+        }
+    }
+}
