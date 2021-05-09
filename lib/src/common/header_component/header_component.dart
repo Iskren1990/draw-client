@@ -35,7 +35,6 @@ class HeaderComponent implements OnInit, OnDestroy {
 
   void logoutFn() {
     userService.getLogout();
-    _router.navigate('/login');
   }
 
   void userLocalStateSet() {

@@ -14,6 +14,9 @@ import 'src/common/footer_component/footer_component.dart';
       routerDirectives,
       HeaderComponent,
       FooterComponent,
+      NgIf,
     ],
-    exports: [RoutePaths, Routes, routerDirectives])
+    exports: [RoutePaths, Routes, routerDirectives]
+    )
+
 class AppComponent {}
