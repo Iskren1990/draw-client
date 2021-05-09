@@ -10,10 +10,9 @@ import '../context/user_context.dart';
 
 @Injectable()
 class UserService {
-
   static final StreamController<String> _userUpdated =
       StreamController.broadcast(onListen: () => UserService.initValue('_'));
-      
+
   Stream<String> get userUpdated => _userUpdated.stream;
 
   final Router _router;
@@ -21,7 +20,6 @@ class UserService {
     contentType: 'application/json',
     baseUrl: 'http://localhost:3000/api',
   ));
-
 
   UserService(this._router) {
     _dio.interceptors.add(AuthInterceptor());
@@ -59,11 +57,10 @@ class UserService {
 
   void getLogout() async {
     try {
-
       await _dio.get('/user/logout');
       UserContext.deleteUserData();
       _userUpdated.add('update-state');
-
+      await _router.navigate('/login');
     } catch (e) {
       print(e);
     }

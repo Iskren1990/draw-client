@@ -16,7 +16,7 @@ class UserContext {
 
   static Object getUserData() {
     if (_token == null) {
-      _token =  window.localStorage['uid'];
+      _token = window.localStorage['uid'];
       _id = window.localStorage['id'];
       _username = window.localStorage['username'];
     }
@@ -39,11 +39,19 @@ class UserContext {
     return _token ??= window.localStorage['uid'];
   }
 
-    String get id {
+  String get id {
     return _id ??= window.localStorage['id'];
   }
 
-    String get username {
+  String get username {
     return _username ??= window.localStorage['username'];
+  }
+
+  String tokenCheck() {
+    return token ?? window.localStorage['uid'];
+  }
+
+  bool isLogged() {
+    return (tokenCheck() != null);
   }
 }

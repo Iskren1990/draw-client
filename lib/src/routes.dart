@@ -12,32 +12,45 @@ export 'route_paths.dart';
 
 class Routes {
 
+   bool redirectIfNotLoggedIn = false;
+   bool redirectIfLoggedIn = false;
+
+  Routes.conf({
+    this.redirectIfNotLoggedIn,
+    this.redirectIfLoggedIn
+  });
+
   static final login = RouteDefinition(
     routePath: RoutePaths.login,
     component: login_template.LoginComponentNgFactory,
+    additionalData: Routes.conf(redirectIfNotLoggedIn: false, redirectIfLoggedIn: true),
   );
 
   static final register = RouteDefinition(
     routePath: RoutePaths.register,
     component: register_template.RegisterComponentNgFactory,
+    additionalData: Routes.conf(redirectIfNotLoggedIn: false, redirectIfLoggedIn: true),
   );
 
-    static final createDraw = RouteDefinition(
+  static final createDraw = RouteDefinition(
     routePath: RoutePaths.createDraw,
     component: create_draw_template.CreateDrawComponentNgFactory,
+    additionalData: Routes.conf(redirectIfNotLoggedIn: true, redirectIfLoggedIn: false),
   );
 
-  static final userDrows = RouteDefinition(
+  static  final userDrows = RouteDefinition(
     routePath: RoutePaths.userDraws,
     component: user_draws_template.UserDrawsComponentNgFactory,
+    additionalData: Routes.conf(redirectIfNotLoggedIn: true, redirectIfLoggedIn: false),
   );
 
-    static final viewDraw = RouteDefinition(
+    static  final viewDraw = RouteDefinition(
     routePath: RoutePaths.viewDraw,
     component: draw_component_template.DrawComponentNgFactory,
+    additionalData: Routes.conf(redirectIfNotLoggedIn: true, redirectIfLoggedIn: false),
   );
 
-   static final all = <RouteDefinition>[
+    static final all = <RouteDefinition>[
     login,
     register,
     userDrows,
@@ -45,3 +58,4 @@ class Routes {
     viewDraw,
   ];
 }
+ 
