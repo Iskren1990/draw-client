@@ -7,16 +7,14 @@ import '../../services/user_service.dart';
 import '../../context/user_context.dart';
 
 @Component(
-    selector: 'header-template',
-    templateUrl: 'header_template.html',
-    styles: ['.active-route {transition: background-color .3s}'],
-    directives: [routerDirectives, coreDirectives],
-        providers: [ClassProvider(UserService)],
-    )
-
+  selector: 'header-template',
+  templateUrl: 'header_template.html',
+  styles: ['.active-route {transition: background-color .3s}'],
+  directives: [routerDirectives, coreDirectives],
+  providers: [ClassProvider(UserService)],
+)
 class HeaderComponent implements OnInit, OnDestroy {
-
-  StreamSubscription<int> _userStateSubscription;
+  StreamSubscription<String> userStateSubscription;
 
   UserService userService;
   bool isLogged;
@@ -27,19 +25,12 @@ class HeaderComponent implements OnInit, OnDestroy {
 
   @override
   void ngOnInit() {
-    userLocalStateSet();
-    
-    _userStateSubscription = 
-      userService.userUpdated.listen(
-        (action) {
-        print(action);
-        userLocalStateSet();
-        });
+    userStateSubscription = userService.userUpdated.listen((e) => userLocalStateSet());
   }
 
   @override
   void ngOnDestroy() {
-    _userStateSubscription.cancel();
+    userStateSubscription.cancel();
   }
 
   void logoutFn() {

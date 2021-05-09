@@ -1,5 +1,5 @@
 <nav class="light-blue darken-1">
-    <div class="nav-wrapper light-blue darken-2">
+    <div *ngIf='isLogged != null' class="nav-wrapper light-blue darken-2">
         <a routerLink="/" class="brand-logo">Hello {{username}}</a>
         <ul *ngIf='!isLogged' id="nav-mobile" class="right hide-on-med-and-down">
             <li><a routerLink="login">Login</a></li>

@@ -11,10 +11,10 @@ import '../context/user_context.dart';
 @Injectable()
 class UserService {
 
-  // stream attempt
-  //https://pub.dev/documentation/angular_components/latest/utils_async_async/utils_async_async-library.html
-  final StreamController<int> _userUpdated = StreamController.broadcast();
-  Stream<int> get userUpdated => _userUpdated.stream;
+  static final StreamController<String> _userUpdated =
+      StreamController.broadcast(onListen: () => UserService.initValue('_'));
+      
+  Stream<String> get userUpdated => _userUpdated.stream;
 
   final Router _router;
   final Dio _dio = Dio(BaseOptions(
@@ -22,23 +22,25 @@ class UserService {
     baseUrl: 'http://localhost:3000/api',
   ));
 
+
   UserService(this._router) {
     _dio.interceptors.add(AuthInterceptor());
   }
 
+  static void initValue(e) {
+    _userUpdated.add('update-state');
+  }
+
   void postLogin(UserModel payload) async {
-
     try {
-    
-    final res = await _dio.post('/user/login',
-      data: payload.userToJson());
+      final res = await _dio.post('/user/login', data: payload.userToJson());
 
-    if (!res.data['token'].startsWith('Bearer ')) throw Exception(res.data);
+      if (!res.data['token'].startsWith('Bearer ')) throw Exception(res.data);
 
-    UserContext.setUserData(res.data);
-    _userUpdated.add(1);
-    await _router.navigateByUrl('/', reload: true);
+      UserContext.setUserData(res.data);
+      _userUpdated.add('update-state');
 
+      await _router.navigateByUrl('/', reload: true);
     } catch (e) {
       print(e);
     }
@@ -46,12 +48,10 @@ class UserService {
 
   void postRegister(UserModel payload) async {
     try {
-      final res = await _dio.post('/user/register', 
-          data: payload.userToJson());
+      final res = await _dio.post('/user/register', data: payload.userToJson());
 
       if (!res.data.toString().contains('_id')) throw Exception(res.data);
       postLogin(payload);
-
     } catch (e) {
       print(e);
     }
@@ -59,9 +59,11 @@ class UserService {
 
   void getLogout() async {
     try {
+
       await _dio.get('/user/logout');
       UserContext.deleteUserData();
-      _userUpdated.add(2);
+      _userUpdated.add('update-state');
+
     } catch (e) {
       print(e);
     }
